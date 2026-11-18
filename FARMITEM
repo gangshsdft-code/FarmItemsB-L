@@ -103,11 +103,11 @@ local function InitializePlayer()
 		end
 	end)
 	task.spawn(function()
-		LocalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-		if LocalCharacter then
+		LocalPlayer.CharacterAdded:Connect(function(Character)
+			LocalCharacter = Character
 			local Animate_Human = LocalCharacter:WaitForChild("Animate_Human")
 			Animate_Human.Enabled = false
-		end
+		end)
 	end)
 end
 
