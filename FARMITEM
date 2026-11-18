@@ -18,13 +18,14 @@ local ShouldStayInServer = false
 
 local Timer = 5
 local CurrentTimer = Timer
+local ResetIterations = 0
 local Items = {"Pale Key"}
 
 queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport)
 
 task.spawn(function()
 	while task.wait(1) do
-		if CurrentTimer <= 0 and ShouldStayInServer == false then
+		if CurrentTimer <= 0 or ResetIterations >= 200 and ShouldStayInServer == false then
 			if #Players:GetChildren() <= 1 then
 				LocalPlayer:Kick("\nRejoining...")
 				task.wait(0.3)
@@ -57,14 +58,12 @@ local function FindItems()
 	end
 end
 
-local Iterations = 0
-
 local function ResetTimer()
 	if ShouldStayInServer == true then
 		return
 	end
-	Iterations += 1
-	print("Reset timer. (" .. Iterations .. ")")
+	ResetIterations += 1
+	print("Reset timer. (" .. ResetIterations .. ")")
 	FindItems()
 	CurrentTimer = Timer
 end
@@ -79,6 +78,13 @@ local function InitializePlayer()
 		if MainMusic.Playing ~= false then
 			MainMusic.Playing = false
 		end
+	end)
+	Players.PlayerAdded:Connect(function(NewPlayer)
+		local DisplayName = ""
+		if NewPlayer.Name ~= NewPlayer.DisplayName then
+			DisplayName = "@".. NewPlayer.DisplayName
+		end
+		LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. DisplayName .." | You have been kicked to avoid being spotted.")
 	end)
 end
 
