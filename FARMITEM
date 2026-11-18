@@ -72,6 +72,11 @@ local function InitializePlayer()
 	local Menu = PlayerGui:WaitForChild("TeamSelect_Menu")
 	local MainMusic = Menu.LocalScript.Music.Music_Main
 	MainMusic.Playing = false
+	MainMusic:GetPropertyChangedSignal("Playing"):Connect(function()
+		if MainMusic.Playing ~= false then
+			MainMusic.Playing = false
+		end
+	end)
 end
 
 Temp.ChildAdded:Connect(function(NewInstance)
