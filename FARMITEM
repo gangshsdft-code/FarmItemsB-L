@@ -42,7 +42,7 @@ local function StayInServer()
 	ShouldStayInServer = true
 	local RingSound = Instance.new("Sound",game.CoreGui)
 	RingSound.SoundId = "rbxassetid://2783281207"
-	RingSound.Volume = 5
+	RingSound.Volume = 2.5
 	RingSound:Play()
 end
 
