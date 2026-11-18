@@ -25,7 +25,10 @@ queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus 
 
 task.spawn(function()
 	while task.wait(1) do
-		if CurrentTimer <= 0 or ResetIterations >= 200 and ShouldStayInServer == false then
+		if CurrentTimer <= 0 or ResetIterations >= 200 then
+			if ShouldStayInServer ~= false then
+				return
+			end
 			if #Players:GetChildren() <= 1 then
 				LocalPlayer:Kick("\nRejoining...")
 				task.wait(0.3)
