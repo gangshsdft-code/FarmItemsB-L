@@ -17,7 +17,7 @@ local Temp = WorldItems:WaitForChild("Temp")
 
 local ShouldStayInServer = false
 
-local Timer = 5
+local Timer = 60
 local CurrentTimer = Timer
 local ResetIterations = 0
 local Items = {"Pale Key"}
