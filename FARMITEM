@@ -17,7 +17,7 @@ local Temp = WorldItems:WaitForChild("Temp")
 
 local ShouldStayInServer = false
 
-local Timer = 10
+local Timer = 5
 local CurrentTimer = Timer
 local ResetIterations = 0
 local Items = {"Pale Key"}
@@ -26,7 +26,7 @@ queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus 
 
 task.spawn(function()
 	while task.wait(1) do
-		if CurrentTimer <= 0 then -- or ResetIterations >= 200 
+		if CurrentTimer <= 0 or ResetIterations >= 250  then
 			if ShouldStayInServer ~= false then
 				return
 			end
