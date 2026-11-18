@@ -20,7 +20,7 @@ local Timer = 5
 local CurrentTimer = Timer
 local Items = {"Pipe Rifle","Pale Key",}
 
-queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) -- EXPLOIT RERUN METHOD
+queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport)
 
 task.spawn(function()
 	while task.wait(1) do
@@ -69,17 +69,10 @@ end
 local function InitializePlayer()
 	FindItems()
 	local PlayerGui = LocalPlayer.PlayerGui
-	
 	local Menu = PlayerGui:WaitForChild("TeamSelect_Menu")
-	local LocalScript = Menu:WaitForChild("LocalScript")
-	
-	local MusicFolder = LocalPlayer:WaitForChild("Music")
-	local MainMusic = MusicFolder:WaitForChild("Music_Main")
-	
+	local MainMusic = Menu.LocalScript.Music.Music_Main
 	MainMusic.Playing = false
 end
-
---game:GetService("Players").LocalPlayer.PlayerGui.TeamSelect_Menu.LocalScript.Music.Music_Main
 
 Temp.ChildAdded:Connect(function(NewInstance)
 	if NewInstance:IsA("Configuration") and ShouldStayInServer == false then
