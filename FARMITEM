@@ -27,7 +27,7 @@ queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus 
 task.spawn(function()
 	while task.wait(1) do
 		if CurrentTimer <= 0 or ResetIterations >= 200 then
-			if ShouldStayInServer == false then
+			if ShouldStayInServer ~= false then
 				return
 			end
 			if #Players:GetChildren() <= 1 then
@@ -96,7 +96,7 @@ local function InitializePlayer()
 			end
 			local Sound = CreateSound("rbxassetid://138365624960402",1,5)
 			Sound:Play()
-			LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. " " .. DisplayName .." | You have been kicked to avoid being spotted.")
+			LocalPlayer:Kick("Player joined: [".. NewPlayer.Name .. " " .. DisplayName .."] | You have been kicked to avoid being spotted.")
 		elseif ShouldStayInServer == true then
 			local Sound = CreateSound("rbxassetid://8426701399",1,5)
 			Sound:Play()
