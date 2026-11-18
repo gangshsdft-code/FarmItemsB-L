@@ -38,11 +38,19 @@ task.spawn(function()
 	end
 end)
 
+local function FStayInServer()
+	StayInServer = true
+	local RingSound = Instance.new("Sound",game.CoreGui)
+	RingSound.SoundId = "rbxassetid://2783281207"
+	RingSound:Play()
+	game:GetService("Debris"):AddItem(RingSound,RingSound.TimeLength+0.1)
+end
+
 local function FindItems()
 	for _, Item in pairs(Spawn:GetChildren()) do
 		for _, DesiredItem in pairs(Items) do
 			if Item.Name == DesiredItem then
-				StayInServer = true
+				FStayInServer()
 				break
 			end
 		end
@@ -62,7 +70,7 @@ Temp.ChildAdded:Connect(function(NewInstance)
 	if NewInstance:IsA("Configuration") and StayInServer == false then
 		for _, Item in pairs(Items) do
 			if NewInstance.Name == Item then
-				StayInServer = true
+				FStayInServer()
 				return
 			end
 		end
