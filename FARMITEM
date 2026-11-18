@@ -14,7 +14,7 @@ end
 local Spawn = WorldItems:WaitForChild("Spawn")
 local Temp = WorldItems:WaitForChild("Temp")
 
-local StayInServer = false
+local ShouldStayInServer = false
 
 local Timer = 5
 local CurrentTimer = Timer
@@ -24,7 +24,7 @@ queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus 
 
 task.spawn(function()
 	while task.wait(1) do
-		if CurrentTimer <= 0 and StayInServer == false then
+		if CurrentTimer <= 0 and ShouldStayInServer == false then
 			if #Players:GetChildren() <= 1 then
 				LocalPlayer:Kick("\nRejoining...")
 				task.wait(0.3)
@@ -38,19 +38,19 @@ task.spawn(function()
 	end
 end)
 
-local function FStayInServer()
-	StayInServer = true
+local function StayInServer()
+	ShouldStayInServer = true
 	local RingSound = Instance.new("Sound",game.CoreGui)
 	RingSound.SoundId = "rbxassetid://2783281207"
+	RingSound.Volume = 5
 	RingSound:Play()
-	game:GetService("Debris"):AddItem(RingSound,RingSound.TimeLength+0.1)
 end
 
 local function FindItems()
 	for _, Item in pairs(Spawn:GetChildren()) do
 		for _, DesiredItem in pairs(Items) do
 			if Item.Name == DesiredItem then
-				FStayInServer()
+				StayInServer()
 				break
 			end
 		end
@@ -58,7 +58,7 @@ local function FindItems()
 end
 
 local function ResetTimer()
-	if StayInServer == true then
+	if ShouldStayInServer == true then
 		return
 	end
 	print("Reset timer.")
@@ -67,10 +67,10 @@ local function ResetTimer()
 end
 
 Temp.ChildAdded:Connect(function(NewInstance)
-	if NewInstance:IsA("Configuration") and StayInServer == false then
+	if NewInstance:IsA("Configuration") and ShouldStayInServer == false then
 		for _, Item in pairs(Items) do
 			if NewInstance.Name == Item then
-				FStayInServer()
+				StayInServer()
 				return
 			end
 		end
