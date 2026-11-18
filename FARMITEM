@@ -27,15 +27,13 @@ queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus 
 task.spawn(function()
 	while task.wait(1) do
 		if CurrentTimer <= 0 or ResetIterations >= 200 then
-			if ShouldStayInServer ~= false then
+			if ShouldStayInServer == false then
 				return
 			end
 			if #Players:GetChildren() <= 1 then
 				LocalPlayer:Kick("\nRejoining...")
 				task.wait(0.5)
 				TeleportService:Teleport(game.PlaceId, LocalPlayer, nil)
-			else
-				LocalPlayer:Kick("Server is not refreshable.")
 			end
 			break
 		end
@@ -98,7 +96,7 @@ local function InitializePlayer()
 			end
 			local Sound = CreateSound("rbxassetid://124513140438986",0.75,5)
 			Sound:Play()
-			LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. DisplayName .." | You have been kicked to avoid being spotted.")
+			LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. " " .. DisplayName .." | You have been kicked to avoid being spotted.")
 		elseif ShouldStayInServer == true then
 			local Sound = CreateSound("rbxassetid://136246521597339",1,5)
 			Sound:Play()
