@@ -66,6 +66,21 @@ local function ResetTimer()
 	CurrentTimer = Timer
 end
 
+local function InitializePlayer()
+	FindItems()
+	local PlayerGui = LocalPlayer.PlayerGui
+	
+	local Menu = PlayerGui:WaitForChild("TeamSelect_Menu")
+	local LocalScript = Menu:WaitForChild("LocalScript")
+	
+	local MusicFolder = LocalPlayer:WaitForChild("Music")
+	local MainMusic = MusicFolder:WaitForChild("Music_Main")
+	
+	MainMusic.Playing = false
+end
+
+--game:GetService("Players").LocalPlayer.PlayerGui.TeamSelect_Menu.LocalScript.Music.Music_Main
+
 Temp.ChildAdded:Connect(function(NewInstance)
 	if NewInstance:IsA("Configuration") and ShouldStayInServer == false then
 		for _, Item in pairs(Items) do
@@ -78,10 +93,10 @@ Temp.ChildAdded:Connect(function(NewInstance)
 	end
 end)
 
-FindItems()
-
 LocalPlayer.OnTeleport:Connect(function()
 	if queueteleport then
 		queueteleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/gangshsdft-code/FarmItemsB-L/main/FARMITEM"))()')
 	end
 end)
+
+InitializePlayer()
