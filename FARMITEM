@@ -21,8 +21,8 @@ task.spawn(function()
 		if CurrentTimer <= 0 and StayInServer == false then
 			if #Players:GetChildren() <= 1 then
 				LocalPlayer:Kick("\nRejoining...")
+				task.wait(0.3)
 				TeleportService:Teleport(game.PlaceId, LocalPlayer, nil)
-				
 			else
 				LocalPlayer:Kick("Server is not refreshable.")
 			end
