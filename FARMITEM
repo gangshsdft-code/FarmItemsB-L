@@ -2,6 +2,7 @@ local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
 
 local LocalPlayer = Players.LocalPlayer
+local LocalCharacter
 
 local WorldItems = workspace:WaitForChild("WorldItems")
 
@@ -101,6 +102,13 @@ local function InitializePlayer()
 		elseif ShouldStayInServer == true then
 			local Sound = CreateSound("rbxassetid://136246521597339",1,5)
 			Sound:Play()
+		end
+	end)
+	task.spawn(function()
+		LocalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+		if LocalCharacter then
+			local Animate_Human = LocalCharacter:WaitForChild("Animate_Human")
+			Animate_Human.Enabled = false
 		end
 	end)
 end
