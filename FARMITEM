@@ -5,6 +5,12 @@ local LocalPlayer = Players.LocalPlayer
 
 local WorldItems = workspace:WaitForChild("WorldItems")
 
+if WorldItems:GetAttribute("FindItemExecuted") ~= nil then
+	return
+else
+	WorldItems:SetAttribute("FindItemExecuted", true)
+end
+
 local Spawn = WorldItems:WaitForChild("Spawn")
 local Temp = WorldItems:WaitForChild("Temp")
 
