@@ -57,11 +57,14 @@ local function FindItems()
 	end
 end
 
+local Iterations = 0
+
 local function ResetTimer()
 	if ShouldStayInServer == true then
 		return
 	end
-	print("Reset timer.")
+	Iterations += 1
+	print("Reset timer. (" .. Iterations .. ")")
 	FindItems()
 	CurrentTimer = Timer
 end
