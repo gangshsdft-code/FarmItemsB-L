@@ -31,7 +31,7 @@ task.spawn(function()
 			end
 			if #Players:GetChildren() <= 1 then
 				LocalPlayer:Kick("\nRejoining...")
-				task.wait(0.3)
+				task.wait(0.5)
 				TeleportService:Teleport(game.PlaceId, LocalPlayer, nil)
 			else
 				LocalPlayer:Kick("Server is not refreshable.")
@@ -42,12 +42,19 @@ task.spawn(function()
 	end
 end)
 
+local function CreateSound(SoundId:string,PlaybackSpeed:number,Volume:number,AddToDebris:boolean)
+	local Sound = Instance.new("Sound",game.CoreGui)
+	Sound.SoundId = SoundId
+	Sound.PlaybackSpeed = PlaybackSpeed
+	Sound.Volume = Volume
+	print(Sound.TimeLength)
+	return Sound
+end
+
 local function StayInServer()
 	ShouldStayInServer = true
-	local RingSound = Instance.new("Sound",game.CoreGui)
-	RingSound.SoundId = "rbxassetid://2783281207"
-	RingSound.Volume = 2.5
-	RingSound:Play()
+	local Sound = CreateSound("rbxassetid://2783281207",1,5)
+	Sound:Play()
 end
 
 local function FindItems()
@@ -87,6 +94,8 @@ local function InitializePlayer()
 		if NewPlayer.Name ~= NewPlayer.DisplayName then
 			DisplayName = "@".. NewPlayer.DisplayName
 		end
+		local Sound = CreateSound("rbxassetid://124513140438986",0.75,2.5)
+		Sound:Play()
 		LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. DisplayName .." | You have been kicked to avoid being spotted.")
 	end)
 end
