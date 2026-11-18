@@ -90,13 +90,18 @@ local function InitializePlayer()
 		end
 	end)
 	Players.PlayerAdded:Connect(function(NewPlayer)
-		local DisplayName = ""
-		if NewPlayer.Name ~= NewPlayer.DisplayName then
-			DisplayName = "@".. NewPlayer.DisplayName
+		if ShouldStayInServer == false then
+			local DisplayName = ""
+			if NewPlayer.Name ~= NewPlayer.DisplayName then
+				DisplayName = "@".. NewPlayer.DisplayName
+			end
+			local Sound = CreateSound("rbxassetid://124513140438986",0.75,5)
+			Sound:Play()
+			LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. DisplayName .." | You have been kicked to avoid being spotted.")
+		elseif ShouldStayInServer == true then
+			local Sound = CreateSound("rbxassetid://136246521597339",1,5)
+			Sound:Play()
 		end
-		local Sound = CreateSound("rbxassetid://124513140438986",0.75,2.5)
-		Sound:Play()
-		LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. DisplayName .." | You have been kicked to avoid being spotted.")
 	end)
 end
 
