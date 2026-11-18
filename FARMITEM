@@ -18,7 +18,7 @@ local StayInServer = false
 
 local Timer = 5
 local CurrentTimer = Timer
-local Items = {"Pipe Rifle","Pale Key",}
+local Items = {"Scrap Revolver","Pipe Rifle","Pale Key",}
 
 queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) -- EXPLOIT RERUN METHOD
 
