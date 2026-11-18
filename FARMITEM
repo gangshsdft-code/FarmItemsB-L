@@ -96,7 +96,7 @@ local function InitializePlayer()
 			end
 			local Sound = CreateSound("rbxassetid://138365624960402",1,5)
 			Sound:Play()
-			LocalPlayer:Kick("Player joined: [".. NewPlayer.Name .. " " .. DisplayName .."] | You have been kicked to avoid being spotted.")
+			LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. " " .. DisplayName .." | You have been kicked to avoid being spotted.")
 		elseif ShouldStayInServer == true then
 			local Sound = CreateSound("rbxassetid://8426701399",1,5)
 			Sound:Play()
