@@ -1,9 +1,11 @@
 local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TeleportService = game:GetService("TeleportService")
 
 local LocalPlayer = Players.LocalPlayer
 local LocalCharacter
 
+local MainMenu = workspace:WaitForChild("MainMenu")
 local WorldItems = workspace:WaitForChild("WorldItems")
 
 if WorldItems:GetAttribute("FindItemExecuted") ~= nil then
@@ -74,6 +76,12 @@ local function InitializePlayer()
 			MainMusic.Playing = false
 		end
 	end)
+	local Wind1 = MainMenu.XmasMenu.Model.HowlingWind.Sound
+	local Wind2 = ReplicatedStorage.MainMenu.XmasMenu.Model.HowlingWind.Sound
+	local Static = MainMenu.TV.Screen.Static
+	Wind1.Playing = false
+	Wind2.Playing = false
+	Static.Playing = false
 	Players.PlayerAdded:Connect(function(NewPlayer)
 		if ShouldStayInServer == false then
 			local DisplayName = ""
@@ -131,3 +139,6 @@ task.spawn(function()
 		CurrentTimer -= 1
 	end
 end)
+
+--game:GetService("ReplicatedStorage").MainMenu.XmasMenu.Model.HowlingWind.Sound
+--workspace.MainMenu.TV.Screen.Static
