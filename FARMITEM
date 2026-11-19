@@ -117,7 +117,7 @@ InitializePlayer()
 
 task.spawn(function()
 	while task.wait(1) do
-		if CurrentTimer <= 0 or ResetIterations >= 200 then
+		if CurrentTimer <= 0 or ResetIterations >= 165 then
 			if ShouldStayInServer ~= false then
 				break
 			end
