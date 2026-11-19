@@ -18,28 +18,13 @@ local Temp = WorldItems:WaitForChild("Temp")
 local ShouldStayInServer = false
 
 local Timer = 5
+local SearchTimer = 15
 local CurrentTimer = Timer
+
 local ResetIterations = 0
 local Items = {"Pale Key"}
 
 queueteleport = queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport)
-
-task.spawn(function()
-	while task.wait(1) do
-		if CurrentTimer <= 0 or ResetIterations >= 200  then
-			if ShouldStayInServer ~= false then
-				return
-			end
-			if #Players:GetChildren() <= 1 then
-				LocalPlayer:Kick("\nRejoining...")
-				task.wait(0.5)
-				TeleportService:Teleport(game.PlaceId, LocalPlayer, nil)
-			end
-			break
-		end
-		CurrentTimer -= 1
-	end
-end)
 
 local function CreateSound(SoundId:string,PlaybackSpeed:number,Volume:number,AddToDebris:boolean)
 	local Sound = Instance.new("Sound",game.CoreGui)
@@ -79,6 +64,7 @@ end
 
 local function InitializePlayer()
 	FindItems()
+	CurrentTimer = SearchTimer
 	local PlayerGui = LocalPlayer.PlayerGui
 	local Menu = PlayerGui:WaitForChild("TeamSelect_Menu")
 	local MainMusic = Menu.LocalScript.Music.Music_Main
@@ -102,12 +88,10 @@ local function InitializePlayer()
 			Sound:Play()
 		end
 	end)
-	task.spawn(function()
-		LocalPlayer.CharacterAdded:Connect(function(Character)
-			LocalCharacter = Character
-			local Animate_Human = LocalCharacter:WaitForChild("Animate_Human")
-			Animate_Human.Enabled = false
-		end)
+	LocalPlayer.CharacterAdded:Connect(function(Character)
+		LocalCharacter = Character
+		local Animate_Human = LocalCharacter:WaitForChild("Animate_Human")
+		Animate_Human.Enabled = false
 	end)
 end
 
@@ -130,3 +114,20 @@ LocalPlayer.OnTeleport:Connect(function()
 end)
 
 InitializePlayer()
+
+task.spawn(function()
+	while task.wait(1) do
+		if CurrentTimer <= 0 or ResetIterations >= 200 then
+			if ShouldStayInServer ~= false then
+				break
+			end
+			if #Players:GetChildren() <= 1 then
+				LocalPlayer:Kick("\nRejoining...")
+				task.wait(0.5)
+				TeleportService:Teleport(game.PlaceId, LocalPlayer, nil)
+			end
+			break
+		end
+		CurrentTimer -= 1
+	end
+end)
