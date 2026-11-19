@@ -39,7 +39,7 @@ end
 
 local function StayInServer()
 	ShouldStayInServer = true
-	local Sound = CreateSound("rbxassetid://89421399531250",1,5)
+	local Sound = CreateSound("rbxassetid://89421399531250",1,7.5)
 	Sound:Play()
 end
 
@@ -85,11 +85,11 @@ local function InitializePlayer()
 			if NewPlayer.Name ~= NewPlayer.DisplayName then
 				DisplayName = "@".. NewPlayer.DisplayName
 			end
-			local Sound = CreateSound("rbxassetid://138365624960402",1,5)
+			local Sound = CreateSound("rbxassetid://138365624960402",1,7.5)
 			Sound:Play()
 			LocalPlayer:Kick("Player joined: ".. NewPlayer.Name .. " " .. DisplayName .." | You have been kicked to avoid being spotted.")
 		elseif ShouldStayInServer == true then
-			local Sound = CreateSound("rbxassetid://8426701399",1,5)
+			local Sound = CreateSound("rbxassetid://8426701399",1,7.5)
 			Sound:Play()
 		end
 	end)
