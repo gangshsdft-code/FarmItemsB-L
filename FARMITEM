@@ -76,12 +76,9 @@ local function InitializePlayer()
 			MainMusic.Playing = false
 		end
 	end)
-	local Wind1 = MainMenu.XmasMenu.Model.HowlingWind.Sound
-	local Wind2 = ReplicatedStorage.MainMenu.XmasMenu.Model.HowlingWind.Sound
-	local Static = MainMenu.TV.Screen.Static
-	Wind1.Playing = false
-	Wind2.Playing = false
-	Static.Playing = false
+	MainMenu.XmasMenu.Model.HowlingWind.Sound.Playing = false
+	ReplicatedStorage.MainMenu.XmasMenu.Model.HowlingWind.Sound.Playing = false
+	MainMenu.TV.Screen.Static.Playing = false
 	Players.PlayerAdded:Connect(function(NewPlayer)
 		if ShouldStayInServer == false then
 			local DisplayName = ""
